@@ -15,9 +15,9 @@ enum MonthlyVolume {
 }
 
 class Kyc {
-  final int individualId;
-  late Enum purposeOfAccount;
-  late Enum anticipatedMonthlyVolume;
+  final String individualId;
+  late final Enum purposeOfAccount;
+  late final Enum anticipatedMonthlyVolume;
 
   Kyc(
     this.individualId,

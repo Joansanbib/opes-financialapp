@@ -28,14 +28,14 @@ class IndivualImplementation extends IndividualRepo{
 
   @override
   Future<Individual?> getIndividual(url, id) async {
-    var session_token = await storage.read(key: 'access_token');
+
+    var sessionToken = await storage.read(key: 'access_token');
 
     Map<String, String> headers = {
-    'Authorization': 'Bearer $session_token',
+    'Authorization': 'Bearer $sessionToken',
     };
 
     var response = await http.get(headers: headers, url);
-
     String message = returnError(response.statusCode);
   }
 

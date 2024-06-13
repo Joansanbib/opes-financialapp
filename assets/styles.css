@@ -1,0 +1,9 @@
+#chartdiv{
+    width: 100%;
+    min-height: 100vh;
+    overflow: auto;
+    margin: 0 auto;
+}
+.amcharts-legend {
+    margin: 0 auto;
+}
