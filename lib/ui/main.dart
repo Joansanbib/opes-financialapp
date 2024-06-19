@@ -1,8 +1,26 @@
+import 'package:banking_project/data/implementation/movements_impl.dart';
+import 'package:banking_project/ui/calendar.dart';
 import 'package:banking_project/ui/dashboard.dart';
+import 'package:banking_project/ui/transactions.dart';
+import 'package:banking_project/viewmodels/movements_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<MovementsImplementation>(
+          create: (_) => MovementsImplementation(),
+        ),
+        ProxyProvider<MovementsImplementation, MovementsViewModel>(
+          update: (_, movementImpl, __) => MovementsViewModel(movementImpl),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +50,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-        home: const Dashboard(),
+        home: const Transactions(),
     );
   }
 }

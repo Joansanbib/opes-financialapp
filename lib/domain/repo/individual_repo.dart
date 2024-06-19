@@ -5,7 +5,7 @@ abstract class IndividualRepo{
 
   Future<Individuals> getIndividuals(var url);
 
-  Future<Individual> getIndividual(var url, var id);
+  Future<Individual?> getIndividual(var url, var id);
 
   Future<void> startOnBoarding(var url);
 

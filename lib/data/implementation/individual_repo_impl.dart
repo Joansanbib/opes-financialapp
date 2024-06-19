@@ -37,6 +37,7 @@ class IndivualImplementation extends IndividualRepo{
 
     var response = await http.get(headers: headers, url);
     String message = returnError(response.statusCode);
+    return null;
   }
 
 
@@ -54,6 +55,7 @@ class IndivualImplementation extends IndividualRepo{
 
 
     String message = returnError(response.statusCode);
+    
   }
 
 

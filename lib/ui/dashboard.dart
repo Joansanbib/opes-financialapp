@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
 import 'package:flutter_js/flutter_js.dart';
 import 'dart:convert';
@@ -50,11 +51,12 @@ class Dashboard extends StatelessWidget {
                   ),
                 ],
               ),
+
               Row(
                 children: [
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 0.83, // Adjust this value
+                      aspectRatio: 0.7, // Adjust this value
                       child: NavigationMenu(),
                     ),
                   ),
@@ -343,6 +345,30 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
     return Column(
       children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              margin: EdgeInsets.all(screenWidth * 0.04),
+              child: SizedBox(
+                width: screenWidth * 0.85,
+                height: screenHeight * 0.1,
+                child: Card(
+                  color: Colors.white,
+                  elevation: 8,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  borderOnForeground: false,
+                  shadowColor: Colors.grey[100],
+                  child: const Center(
+                    child: Text('Transactions', style: TextStyle(fontSize: 20.0)),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
