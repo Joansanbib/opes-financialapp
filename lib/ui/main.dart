@@ -1,7 +1,8 @@
+import 'package:banking_project/data/implementation/countries_repo_impl.dart';
 import 'package:banking_project/data/implementation/movements_impl.dart';
-import 'package:banking_project/ui/calendar.dart';
-import 'package:banking_project/ui/dashboard.dart';
+import 'package:banking_project/ui/country.dart';
 import 'package:banking_project/ui/transactions.dart';
+import 'package:banking_project/viewmodels/countries_viewmodel.dart';
 import 'package:banking_project/viewmodels/movements_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,12 @@ void main() {
         ),
         ProxyProvider<MovementsImplementation, MovementsViewModel>(
           update: (_, movementImpl, __) => MovementsViewModel(movementImpl),
+        ),
+        Provider<CountriesRepoImpl>(
+          create: (_) => CountriesRepoImpl(),
+        ),
+        ProxyProvider<CountriesRepoImpl, CountriesViewModel>(
+          update: (_, countriesImpl, __) => CountriesViewModel(countriesImpl),
         ),
       ],
       child: const MyApp(),
@@ -50,7 +57,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-        home: const Transactions(),
+        home: const CountryUI(),
     );
   }
 }
