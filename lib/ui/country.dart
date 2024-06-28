@@ -44,11 +44,7 @@ class _CountryState extends State<CountryUI> {
              if (countriesAll != null)
               ...countriesAll!.map((country) => Text('${country.name} ${country.code} ${country.refreshStartTime}'))
             else
-              Text(error),
-              Text(error),
-              Text(error),
-              Text(error),
-              Text(error),
+              const CircularProgressIndicator(),
           ],
         )));
   }
