@@ -1,11 +1,14 @@
 import 'package:banking_project/data/implementation/countries_repo_impl.dart';
 import 'package:banking_project/data/implementation/movements_impl.dart';
+import 'package:banking_project/data/implementation/partner_consents_repo_impl.dart';
 import 'package:banking_project/data/implementation/providers_repo_impl.dart';
 import 'package:banking_project/ui/country.dart';
+import 'package:banking_project/ui/partner_consents.dart';
 import 'package:banking_project/ui/provider.dart';
 import 'package:banking_project/ui/transactions.dart';
 import 'package:banking_project/viewmodels/countries_viewmodel.dart';
 import 'package:banking_project/viewmodels/movements_viewmodel.dart';
+import 'package:banking_project/viewmodels/partner_consents_viewmodel.dart';
 import 'package:banking_project/viewmodels/provider_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +35,12 @@ void main() {
         ),
         ProxyProvider<ProvidersRepoImpl, ProviderViewmodel>(
           update: (_, providerImpl, __) => ProviderViewmodel(providerImpl),
+        ),
+        Provider<PartnerConsentsRepoImpl>(
+          create: (_) => PartnerConsentsRepoImpl(),
+        ),
+        ProxyProvider<PartnerConsentsRepoImpl, PartnerConsentsViewmodel>(
+          update: (_, partnerConsentsImpl, __) => PartnerConsentsViewmodel(partnerConsentsImpl),
         ),
       ],
       child: const MyApp(),
@@ -66,7 +75,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-        home: const ProviderUI(),
+        home: const PartnerConsentsUI(),
     );
   }
 }
