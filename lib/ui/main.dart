@@ -1,12 +1,16 @@
 import 'package:banking_project/data/implementation/countries_repo_impl.dart';
+import 'package:banking_project/data/implementation/customer_repo_impl.dart';
 import 'package:banking_project/data/implementation/movements_impl.dart';
 import 'package:banking_project/data/implementation/partner_consents_repo_impl.dart';
 import 'package:banking_project/data/implementation/providers_repo_impl.dart';
 import 'package:banking_project/ui/country.dart';
+import 'package:banking_project/ui/customer.dart';
+import 'package:banking_project/ui/dashboard.dart';
 import 'package:banking_project/ui/partner_consents.dart';
 import 'package:banking_project/ui/provider.dart';
 import 'package:banking_project/ui/transactions.dart';
 import 'package:banking_project/viewmodels/countries_viewmodel.dart';
+import 'package:banking_project/viewmodels/customer_viewmodel.dart';
 import 'package:banking_project/viewmodels/movements_viewmodel.dart';
 import 'package:banking_project/viewmodels/partner_consents_viewmodel.dart';
 import 'package:banking_project/viewmodels/provider_viewmodel.dart';
@@ -42,6 +46,12 @@ void main() {
         ProxyProvider<PartnerConsentsRepoImpl, PartnerConsentsViewmodel>(
           update: (_, partnerConsentsImpl, __) => PartnerConsentsViewmodel(partnerConsentsImpl),
         ),
+        Provider<CustomerRepoImpl>(
+          create: (_) => CustomerRepoImpl(),
+        ),
+        ProxyProvider<CustomerRepoImpl, CustomerViewmodel>(
+          update: (_, customerImpl, __) => CustomerViewmodel(customerImpl),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -75,7 +85,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-        home: const PartnerConsentsUI(),
+        home: const Dashboard(),
     );
   }
 }

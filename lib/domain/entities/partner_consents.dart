@@ -33,14 +33,14 @@ class PartnerConsents {
 
   factory PartnerConsents.fromJson(Map<String, dynamic> json){
       return PartnerConsents(
-        json['id'] as String ?? '',
-        json['connection_id'] as String ?? '',
-        json['customer_id'] as String ?? '',
-        json['status'] as String ?? '',
-        json['revoked_by'] as String ?? '',
-        json['revoked_at'] as String ?? '',
-        json['created_at'] as String ?? '',
-        json['updated_at'] as String ?? '',
+        json['id'] as String? ?? '',
+        json['connection_id'] as String? ?? '',
+        json['customer_id'] as String? ?? '',
+        json['status'] as String? ?? '',
+        json['revoked_by'] as String? ?? '',
+        json['revoked_at'] as String? ?? '',
+        json['created_at'] as String? ?? '',
+        json['updated_at'] as String? ?? '',
       );
     }
 }

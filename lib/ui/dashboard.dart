@@ -1,3 +1,5 @@
+import 'package:banking_project/ui/balance.dart';
+import 'package:banking_project/ui/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +13,6 @@ import 'gl_script.dart' show glScript;
 import 'dark_theme_script.dart' show darkThemeScript;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
-
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -35,8 +36,8 @@ class Dashboard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 0.9, // Adjust this value
-                      child: JsTest(),
+                      aspectRatio: 1, // Adjust this value
+                      child: DashboardChart(),
                     ),
                   ),
                 ],
@@ -45,13 +46,12 @@ class Dashboard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 1, // Adjust this value
+                      aspectRatio: 1.4, // Adjust this value
                       child: InfoChart(),
                     ),
                   ),
                 ],
               ),
-
               Row(
                 children: [
                   Expanded(
@@ -141,26 +141,24 @@ class JsTest extends StatefulWidget {
 }
 
 class _JsTestState extends State<JsTest> {
-
   final controller = WebViewController()
-  ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  ..setBackgroundColor(const Color(0x00000000))
-  ..enableZoom(false)
-  ..setNavigationDelegate(
-    NavigationDelegate(
-      onProgress: (int progress) {
-        // Update loading bar.
-      },
-    ),
-  )
-  ..loadFlutterAsset('assets/pie_chart.html');
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(const Color(0x00000000))
+    ..enableZoom(false)
+    ..setNavigationDelegate(
+      NavigationDelegate(
+        onProgress: (int progress) {
+          // Update loading bar.
+        },
+      ),
+    )
+    ..loadFlutterAsset('assets/pie_chart.html');
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-          child: WebViewWidget(controller: controller),
-
-      );
+      child: WebViewWidget(controller: controller),
+    );
   }
 }
 //   final JavascriptRuntime jsRuntime = getJavascriptRuntime();
@@ -345,76 +343,96 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
     return Column(
       children: [
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   children: [
+        //     Container(
+        //       margin: EdgeInsets.all(screenWidth * 0.04),
+        //       child: SizedBox(
+        //         width: screenWidth * 0.85,
+        //         height: screenHeight * 0.1,
+        //         child: Card(
+        //           color: Colors.white,
+        //           elevation: 8,
+        //           shape: RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(15.0),
+        //           ),
+        //           borderOnForeground: false,
+        //           shadowColor: Colors.grey[100],
+        //           child: const Center(
+        //             child: Text('Transactions', style: TextStyle(fontSize: 20.0)),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              margin: EdgeInsets.all(screenWidth * 0.04),
-              child: SizedBox(
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.1,
-                child: Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  borderOnForeground: false,
-                  shadowColor: Colors.grey[100],
-                  child: const Center(
-                    child: Text('Transactions', style: TextStyle(fontSize: 20.0)),
+            TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Balance();
+                  },
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(screenWidth * 0.04),
+                child: SizedBox(
+                  width: screenWidth * 0.85,
+                  height: screenHeight * 0.1,
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    borderOnForeground: false,
+                    shadowColor: Colors.grey[100],
+                    child: const Center(
+                      child: Text('Balance', style: TextStyle(fontSize: 20.0)),
+                    ),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              margin: EdgeInsets.all(screenWidth * 0.04),
-              child: SizedBox(
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.1,
-                child: Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  borderOnForeground: false,
-                  shadowColor: Colors.grey[100],
-                  child: const Center(
-                    child: Text('Balance', style: TextStyle(fontSize: 20.0)),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              margin: EdgeInsets.all(screenWidth * 0.04),
-              child: SizedBox(
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.1,
-                child: Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  borderOnForeground: false,
-                  shadowColor: Colors.grey[100],
-                  child: const Center(
-                    child: Text('Savings', style: TextStyle(fontSize: 20.0)),
+            TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Balance();
+                  },
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(screenWidth * 0.04),
+                child: SizedBox(
+                  width: screenWidth * 0.85,
+                  height: screenHeight * 0.1,
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    borderOnForeground: false,
+                    shadowColor: Colors.grey[100],
+                    child: const Center(
+                      child: Text('Savings', style: TextStyle(fontSize: 20.0)),
+                    ),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
         Row(

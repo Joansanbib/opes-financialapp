@@ -21,8 +21,10 @@ class PartnerConsentsRepoImpl extends PartnerConsentsRepo {
     if (response.statusCode == 200) {
       List<PartnerConsents> partnerConsents = [];
       var jsonResponse = json.decode(response.body);
-      var listPartnerConsents = jsonResponse['data'] as Map<String, dynamic>;
-      partnerConsents.add(PartnerConsents.fromJson(listPartnerConsents));
+      var listPartnerConsents = jsonResponse['data'] as List<dynamic>;
+      for (var partnerConsent in listPartnerConsents) {
+        partnerConsents.add(PartnerConsents.fromJson(partnerConsent));
+      }
       return PartnerConsentsResult(partnerConsents: partnerConsents);
     } else {
       String error = returnError(response.statusCode);
