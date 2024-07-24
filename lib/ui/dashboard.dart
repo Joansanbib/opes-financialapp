@@ -1,29 +1,15 @@
+import 'package:banking_project/ui/balance.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
-import 'package:flutter_js/flutter_js.dart';
-import 'dart:convert';
-import 'dart:async';
-import 'liquid_script.dart' show liquidScript;
-import 'gl_script.dart' show glScript;
-import 'dark_theme_script.dart' show darkThemeScript;
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
+// Main class, the dashboard. There's some classes. Each one does a different section.
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // var size = MediaQuery.of(context).size;
-
-    // /*24 is for notification bar on Android*/
-    // final double itemHeight = size.height - kToolbarHeight;
-    // final double itemWidth = size.width;
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Dashboard'),
@@ -35,8 +21,8 @@ class Dashboard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 0.9, // Adjust this value
-                      child: JsTest(),
+                      aspectRatio: 1, // Adjust this value
+                      child: DashboardChart(),
                     ),
                   ),
                 ],
@@ -45,13 +31,12 @@ class Dashboard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AspectRatio(
-                      aspectRatio: 1, // Adjust this value
+                      aspectRatio: 1.4, // Adjust this value
                       child: InfoChart(),
                     ),
                   ),
                 ],
               ),
-
               Row(
                 children: [
                   Expanded(
@@ -69,7 +54,7 @@ class Dashboard extends StatelessWidget {
 }
 
 class DashboardChart extends StatefulWidget {
-  const DashboardChart({Key? key}) : super(key: key);
+  const DashboardChart({super.key});
 
   @override
   _DashboardChartState createState() => _DashboardChartState();
@@ -134,74 +119,36 @@ class _DashboardChartState extends State<DashboardChart> {
 }
 
 class JsTest extends StatefulWidget {
-  const JsTest({Key? key}) : super(key: key);
+  const JsTest({super.key});
 
   @override
   _JsTestState createState() => _JsTestState();
 }
 
 class _JsTestState extends State<JsTest> {
-
   final controller = WebViewController()
-  ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  ..setBackgroundColor(const Color(0x00000000))
-  ..enableZoom(false)
-  ..setNavigationDelegate(
-    NavigationDelegate(
-      onProgress: (int progress) {
-        // Update loading bar.
-      },
-    ),
-  )
-  ..loadFlutterAsset('assets/pie_chart.html');
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(const Color(0x00000000))
+    ..enableZoom(false)
+    ..setNavigationDelegate(
+      NavigationDelegate(
+        onProgress: (int progress) {
+          // Update loading bar.
+        },
+      ),
+    )
+    ..loadFlutterAsset('assets/pie_chart.html');
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-          child: WebViewWidget(controller: controller),
-
-      );
+      child: WebViewWidget(controller: controller),
+    );
   }
 }
-//   final JavascriptRuntime jsRuntime = getJavascriptRuntime();
-//   dynamic result;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     chartDisplay();
-//   }
-
-//   void chartDisplay() async {
-//     try {
-//       final chartResult = await addJsChart(jsRuntime);
-//       setState(() {
-//         result = chartResult;
-//       });
-//     } on PlatformException catch (e) {
-//       print('Error: $e');
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     if (result == null) {
-//       return const CircularProgressIndicator(); // Show loading spinner while waiting for result
-//     } else {
-//       return Text(result.toString()); // Show result when it's available
-//     }
-//   }
-
-//   Future<int> addJsChart(JavascriptRuntime jsRuntime) async {
-//     String script = await rootBundle.loadString("assets/pie_chart.js");
-//     final jsResult = jsRuntime.evaluate(script);
-//     final result = jsResult.stringResult;
-//     return int.parse(result);
-//   }
 
 class InfoChart extends StatefulWidget {
-  // ignore: use_super_parameters
-  const InfoChart({Key? key}) : super(key: key);
+  const InfoChart({super.key});
 
   @override
   _InfoChartState createState() => _InfoChartState();
@@ -331,7 +278,7 @@ class _InfoChartState extends State<InfoChart> {
 }
 
 class NavigationMenu extends StatefulWidget {
-  const NavigationMenu({Key? key}) : super(key: key);
+  const NavigationMenu({super.key});
 
   @override
   _NavigationMenuState createState() => _NavigationMenuState();
@@ -348,73 +295,69 @@ class _NavigationMenuState extends State<NavigationMenu> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              margin: EdgeInsets.all(screenWidth * 0.04),
-              child: SizedBox(
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.1,
-                child: Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  borderOnForeground: false,
-                  shadowColor: Colors.grey[100],
-                  child: const Center(
-                    child: Text('Transactions', style: TextStyle(fontSize: 20.0)),
+            TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Balance();
+                  },
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(screenWidth * 0.04),
+                child: SizedBox(
+                  width: screenWidth * 0.85,
+                  height: screenHeight * 0.1,
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    borderOnForeground: false,
+                    shadowColor: Colors.grey[100],
+                    child: const Center(
+                      child: Text('Balance', style: TextStyle(fontSize: 20.0)),
+                    ),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              margin: EdgeInsets.all(screenWidth * 0.04),
-              child: SizedBox(
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.1,
-                child: Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  borderOnForeground: false,
-                  shadowColor: Colors.grey[100],
-                  child: const Center(
-                    child: Text('Balance', style: TextStyle(fontSize: 20.0)),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              margin: EdgeInsets.all(screenWidth * 0.04),
-              child: SizedBox(
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.1,
-                child: Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  borderOnForeground: false,
-                  shadowColor: Colors.grey[100],
-                  child: const Center(
-                    child: Text('Savings', style: TextStyle(fontSize: 20.0)),
+            TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const Balance();
+                  },
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(screenWidth * 0.04),
+                child: SizedBox(
+                  width: screenWidth * 0.85,
+                  height: screenHeight * 0.1,
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    borderOnForeground: false,
+                    shadowColor: Colors.grey[100],
+                    child: const Center(
+                      child: Text('Savings', style: TextStyle(fontSize: 20.0)),
+                    ),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
         Row(

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class Transactions extends StatefulWidget {
   const Transactions({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _TransactionsState createState() => _TransactionsState();
 }
 
@@ -26,8 +23,6 @@ class _TransactionsState extends State<Transactions> {
           Container(
             margin: EdgeInsets.all(screenWidth * 0.08),
             child: SizedBox(
-              // width: screenWidth * 0.85,
-              // height: screenHeight * 0.5,
               child: Card(
                   color: Colors.white,
                   elevation: 8,
@@ -182,15 +177,6 @@ class _TransactionsState extends State<Transactions> {
                           )),
                     ],
                   )),
-              // child: const Center(
-              //   child: Text(
-              //     'Savings',
-              //     style: TextStyle(
-              //       fontSize: 20.0,
-              //       color: Colors.black,
-              //     ),
-              //   ),
-              // ),
             ),
           ),
         ],

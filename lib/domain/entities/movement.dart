@@ -1,10 +1,10 @@
-class Movements {
+class Movement {
   final String id;
   final String title;
   final double amount;
   final DateTime date;
 
-  Movements(this.id, this.title, this.amount, this.date);
+  Movement(this.id, this.title, this.amount, this.date);
 
   @override
   String toString() {

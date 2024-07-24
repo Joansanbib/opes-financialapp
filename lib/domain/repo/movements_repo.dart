@@ -1,9 +1,9 @@
-import 'package:banking_project/domain/entities/movements.dart';
+import 'package:banking_project/domain/entities/movement.dart';
 
-abstract class MovementsRepository{
+abstract class MovementsRepo{
 
-  Future<List<Movements>>getMovements(DateTime day, List<Movements> movements);
+  Future<List<Movement>>getMovements(DateTime day, List<Movement> movements);
 
-  Future<List<Movements>> addMovements();
+  Future<List<Movement>> addMovements();
 
 }
