@@ -1,20 +1,18 @@
-import 'package:banking_project/domain/entities/partner_consents.dart';
+import 'package:banking_project/domain/entities/partner_consent.dart';
 import 'package:banking_project/viewmodels/partner_consents_viewmodel.dart';
-import 'package:banking_project/viewmodels/provider_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:banking_project/domain/entities/provider.dart';
 
 
-class PartnerConsentsUI extends StatefulWidget {
-  const PartnerConsentsUI({super.key});
+class PartnerConsents extends StatefulWidget {
+  const PartnerConsents({super.key});
 
   @override
   State<StatefulWidget> createState() => _PartnerConsentsState();
 }
 
-class _PartnerConsentsState extends State<PartnerConsentsUI> {
-  List<PartnerConsents>? partnerConsents = [];
+class _PartnerConsentsState extends State<PartnerConsents> {
+  List<PartnerConsent>? partnerConsents = [];
   String error = "";
 
   @override
@@ -29,7 +27,7 @@ class _PartnerConsentsState extends State<PartnerConsentsUI> {
     final providerVM =
     Provider.of<PartnerConsentsViewmodel>(context, listen: false);
     var result = await providerVM.getPartnerConsents();
-    if (result is List<PartnerConsents>) {
+    if (result is List<PartnerConsent>) {
       partnerConsents = result;
     }else{
       error = result;
@@ -40,7 +38,7 @@ class _PartnerConsentsState extends State<PartnerConsentsUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Countries')),
+        appBar: AppBar(title: const Text('Partner Consents')),
         body: SingleChildScrollView(
             child: Column(
           children: [

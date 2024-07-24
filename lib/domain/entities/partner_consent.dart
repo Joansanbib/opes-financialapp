@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 
-class PartnerConsents {
+class PartnerConsent {
   
   final String? id;
   @JsonKey(name: 'connection_id')
@@ -19,7 +19,7 @@ class PartnerConsents {
   @JsonKey(name: 'updated_at')
   final String? updatedAt;
 
-  PartnerConsents(
+  PartnerConsent(
     this.id,
     this.connectionId,
     this.customerId,
@@ -31,8 +31,8 @@ class PartnerConsents {
 
   );
 
-  factory PartnerConsents.fromJson(Map<String, dynamic> json){
-      return PartnerConsents(
+  factory PartnerConsent.fromJson(Map<String, dynamic> json){
+      return PartnerConsent(
         json['id'] as String? ?? '',
         json['connection_id'] as String? ?? '',
         json['customer_id'] as String? ?? '',
@@ -45,7 +45,7 @@ class PartnerConsents {
     }
 }
 class PartnerConsentsResult {
-  final List<PartnerConsents>? partnerConsents;
+  final List<PartnerConsent>? partnerConsents;
   final String? error;
 
   PartnerConsentsResult({this.partnerConsents, this.error});

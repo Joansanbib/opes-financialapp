@@ -26,11 +26,11 @@ class Customer{
   }
 
 }
-class CustomerResult {
+class CustomersResult {
   final List<Customer>? customers;
   final String? error;
 
-  CustomerResult({this.customers, this.error});
+  CustomersResult({this.customers, this.error});
 
   bool get isSuccess => customers != null;
 }

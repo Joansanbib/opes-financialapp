@@ -3,14 +3,14 @@ import 'package:banking_project/viewmodels/countries_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CountryUI extends StatefulWidget {
-  const CountryUI({super.key});
+class Countries extends StatefulWidget {
+  const Countries({super.key});
 
   @override
   State<StatefulWidget> createState() => _CountryState();
 }
 
-class _CountryState extends State<CountryUI> {
+class _CountryState extends State<Countries> {
   List<Country>? countriesAll = [];
   String error = "";
 

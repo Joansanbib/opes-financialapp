@@ -1,15 +1,15 @@
-import 'package:banking_project/data/services/providers_endpoints.dart';
-import 'package:banking_project/domain/repo/providers_repo.dart';
-import 'package:banking_project/domain/entities/provider.dart';
+import 'package:banking_project/data/services/customers_endpoints.dart';
+import 'package:banking_project/domain/entities/customer.dart';
+import 'package:banking_project/domain/repo/customers_repo.dart';
 import 'package:banking_project/data/constants/app_constants.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class ProvidersRepoImpl extends ProvidersRepo {
+class CustomersRepoImpl extends CustomersRepo {
 
   @override
-  Future<ProvidersResult> getProvider() async {
-    var url = providersURL;
+  Future<CustomersResult> getCustomer() async {
+    var url = customerURL;
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -20,14 +20,16 @@ class ProvidersRepoImpl extends ProvidersRepo {
     var response = await http.get(headers: headers, url);
 
     if (response.statusCode == 200) {
-      List<Provider> providers = [];
+      List<Customer> customers = [];
       var jsonResponse = json.decode(response.body);
-      var listProviders = jsonResponse['data'] as Map<String, dynamic>;
-      providers.add(Provider.fromJson(listProviders));
-      return ProvidersResult(providers: providers);
-    } else {
+      var listCustomers = jsonResponse['data'] as List<dynamic>;
+     for (var customer in listCustomers) {
+        customers.add(Customer.fromJson(customer));
+      }
+      return CustomersResult(customers: customers);
+    } else { 
       String error = returnError(response.statusCode);
-      return ProvidersResult(error: error);
+      return CustomersResult(error: error);
     }
   }
 

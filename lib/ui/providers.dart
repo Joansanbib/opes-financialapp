@@ -1,18 +1,18 @@
-import 'package:banking_project/viewmodels/provider_viewmodel.dart';
+import 'package:banking_project/viewmodels/providers_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:banking_project/domain/entities/provider.dart';
+import 'package:banking_project/domain/entities/provider.dart' as provider_ui;
 
 
-class ProviderUI extends StatefulWidget {
-  const ProviderUI({super.key});
+class Providers extends StatefulWidget {
+  const Providers({super.key});
 
   @override
   State<StatefulWidget> createState() => _ProviderState();
 }
 
-class _ProviderState extends State<ProviderUI> {
-  List<Providers>? providersAll = [];
+class _ProviderState extends State<Providers> {
+  List<provider_ui.Provider>? providersAll = [];
   String error = "";
 
   @override
@@ -25,9 +25,9 @@ class _ProviderState extends State<ProviderUI> {
 
   void loadData() async {
     final providerVM =
-    Provider.of<ProviderViewmodel>(context, listen: false);
+    Provider.of<ProvidersViewmodel>(context, listen: false);
     var result = await providerVM.getProviders();
-    if (result is List<Providers>) {
+    if (result is List<provider_ui.Provider>) {
       providersAll = result;
     }else{
       error = result;
@@ -38,7 +38,7 @@ class _ProviderState extends State<ProviderUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Countries')),
+        appBar: AppBar(title: const Text('Providers')),
         body: SingleChildScrollView(
             child: Column(
           children: [

@@ -1,9 +1,8 @@
-import 'dart:ffi';
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 
-class Providers{
+class Provider{
   final String? id;
   final String? code;
   final String? name;
@@ -78,7 +77,7 @@ class Providers{
   final bool? noFundsRejectionSupported;
 
 
-   Providers(
+   Provider(
     this.id,
     this.code,
     this.name,
@@ -123,8 +122,8 @@ class Providers{
 
    );
 
-   factory Providers.fromJson(Map<String, dynamic> json) {
-    return Providers(
+   factory Provider.fromJson(Map<String, dynamic> json) {
+    return Provider(
       json['id'] as String? ?? '',
       json['code'] as String? ?? '',
       json['name'] as String? ?? '',
@@ -173,11 +172,11 @@ class Providers{
 }
 
 
-class ProviderResult {
-  final List<Providers>? providers;
+class ProvidersResult {
+  final List<Provider>? providers;
   final String? error;
 
-  ProviderResult({this.providers, this.error});
+  ProvidersResult({this.providers, this.error});
 
   bool get isSuccess => providers != null;
 }

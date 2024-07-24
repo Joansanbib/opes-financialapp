@@ -1,6 +1,6 @@
 import 'package:banking_project/data/constants/app_constants.dart';
 import 'package:banking_project/data/services/partner_consents_endpoints.dart';
-import 'package:banking_project/domain/entities/partner_consents.dart';
+import 'package:banking_project/domain/entities/partner_consent.dart';
 import 'package:banking_project/domain/repo/partner_consents_repo.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -19,11 +19,11 @@ class PartnerConsentsRepoImpl extends PartnerConsentsRepo {
     var response = await http.get(url, headers: headers);
 
     if (response.statusCode == 200) {
-      List<PartnerConsents> partnerConsents = [];
+      List<PartnerConsent> partnerConsents = [];
       var jsonResponse = json.decode(response.body);
       var listPartnerConsents = jsonResponse['data'] as List<dynamic>;
       for (var partnerConsent in listPartnerConsents) {
-        partnerConsents.add(PartnerConsents.fromJson(partnerConsent));
+        partnerConsents.add(PartnerConsent.fromJson(partnerConsent));
       }
       return PartnerConsentsResult(partnerConsents: partnerConsents);
     } else {
@@ -36,32 +36,25 @@ class PartnerConsentsRepoImpl extends PartnerConsentsRepo {
     String errorMessage = "";
     switch (errorCode) {
       case 200:
-        errorMessage =
-            "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 200";
         break;
       case 400:
-        errorMessage =
-            "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 400";
         break;
       case 401:
-        errorMessage =
-            "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 401";
         break;
       case 403:
-        errorMessage =
-            "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 403";
         break;
       case 404:
-        errorMessage =
-            "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 404";
         break;
       case 412:
-        errorMessage =
-            "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 412";
         break;
       case 422:
-        errorMessage =
-            "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 422";
         break;
     }
     return errorMessage;

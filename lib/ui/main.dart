@@ -1,19 +1,14 @@
 import 'package:banking_project/data/implementation/countries_repo_impl.dart';
-import 'package:banking_project/data/implementation/customer_repo_impl.dart';
-import 'package:banking_project/data/implementation/movements_impl.dart';
+import 'package:banking_project/data/implementation/customers_repo_impl.dart';
+import 'package:banking_project/data/implementation/movements_repo_impl.dart';
 import 'package:banking_project/data/implementation/partner_consents_repo_impl.dart';
 import 'package:banking_project/data/implementation/providers_repo_impl.dart';
-import 'package:banking_project/ui/country.dart';
-import 'package:banking_project/ui/customer.dart';
 import 'package:banking_project/ui/dashboard.dart';
-import 'package:banking_project/ui/partner_consents.dart';
-import 'package:banking_project/ui/provider.dart';
-import 'package:banking_project/ui/transactions.dart';
 import 'package:banking_project/viewmodels/countries_viewmodel.dart';
-import 'package:banking_project/viewmodels/customer_viewmodel.dart';
+import 'package:banking_project/viewmodels/customers_viewmodel.dart';
 import 'package:banking_project/viewmodels/movements_viewmodel.dart';
 import 'package:banking_project/viewmodels/partner_consents_viewmodel.dart';
-import 'package:banking_project/viewmodels/provider_viewmodel.dart';
+import 'package:banking_project/viewmodels/providers_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +17,10 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        Provider<MovementsImplementation>(
-          create: (_) => MovementsImplementation(),
+        Provider<MovementsRepoImplementation>(
+          create: (_) => MovementsRepoImplementation(),
         ),
-        ProxyProvider<MovementsImplementation, MovementsViewModel>(
+        ProxyProvider<MovementsRepoImplementation, MovementsViewModel>(
           update: (_, movementImpl, __) => MovementsViewModel(movementImpl),
         ),
         Provider<CountriesRepoImpl>(
@@ -37,8 +32,8 @@ void main() {
         Provider<ProvidersRepoImpl>(
           create: (_) => ProvidersRepoImpl(),
         ),
-        ProxyProvider<ProvidersRepoImpl, ProviderViewmodel>(
-          update: (_, providerImpl, __) => ProviderViewmodel(providerImpl),
+        ProxyProvider<ProvidersRepoImpl, ProvidersViewmodel>(
+          update: (_, providerImpl, __) => ProvidersViewmodel(providerImpl),
         ),
         Provider<PartnerConsentsRepoImpl>(
           create: (_) => PartnerConsentsRepoImpl(),
@@ -46,11 +41,11 @@ void main() {
         ProxyProvider<PartnerConsentsRepoImpl, PartnerConsentsViewmodel>(
           update: (_, partnerConsentsImpl, __) => PartnerConsentsViewmodel(partnerConsentsImpl),
         ),
-        Provider<CustomerRepoImpl>(
-          create: (_) => CustomerRepoImpl(),
+        Provider<CustomersRepoImpl>(
+          create: (_) => CustomersRepoImpl(),
         ),
-        ProxyProvider<CustomerRepoImpl, CustomerViewmodel>(
-          update: (_, customerImpl, __) => CustomerViewmodel(customerImpl),
+        ProxyProvider<CustomersRepoImpl, CustomersViewmodel>(
+          update: (_, customerImpl, __) => CustomersViewmodel(customerImpl),
         ),
       ],
       child: const MyApp(),
@@ -86,6 +81,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
         home: const Dashboard(),
+        // Change here the home widget to see the different screens
     );
   }
 }

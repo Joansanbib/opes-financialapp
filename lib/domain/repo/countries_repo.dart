@@ -1,7 +1,7 @@
 import 'package:banking_project/domain/entities/country.dart';
 
 
-abstract class CountryRepo{
+abstract class CountriesRepo{
 
   Future<CountriesResult> getCountries();
 

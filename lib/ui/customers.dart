@@ -1,21 +1,17 @@
 import 'package:banking_project/domain/entities/customer.dart';
-import 'package:banking_project/domain/entities/partner_consents.dart';
-import 'package:banking_project/viewmodels/customer_viewmodel.dart';
-import 'package:banking_project/viewmodels/partner_consents_viewmodel.dart';
-import 'package:banking_project/viewmodels/provider_viewmodel.dart';
+import 'package:banking_project/viewmodels/customers_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:banking_project/domain/entities/provider.dart';
 
 
-class customerUI extends StatefulWidget {
-  const customerUI({super.key});
+class Customers extends StatefulWidget {
+  const Customers({super.key});
 
   @override
   State<StatefulWidget> createState() => _CustomerState();
 }
 
-class _CustomerState extends State<customerUI> {
+class _CustomerState extends State<Customers> {
   List<Customer>? customer = [];
   String error = "";
 
@@ -29,7 +25,7 @@ class _CustomerState extends State<customerUI> {
 
   void loadData() async {
     final providerVM =
-    Provider.of<CustomerViewmodel>(context, listen: false);
+    Provider.of<CustomersViewmodel>(context, listen: false);
     var result = await providerVM.getCustomer();
     if (result is List<Customer>) {
       customer = result;
@@ -42,7 +38,7 @@ class _CustomerState extends State<customerUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Countries')),
+        appBar: AppBar(title: const Text('Customers')),
         body: SingleChildScrollView(
             child: Column(
           children: [

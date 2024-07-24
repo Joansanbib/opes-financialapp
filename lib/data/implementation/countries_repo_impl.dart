@@ -1,17 +1,13 @@
 import 'package:banking_project/data/services/countries_endpoints.dart';
-import 'package:banking_project/domain/repo/country_repo.dart';
+import 'package:banking_project/domain/repo/countries_repo.dart';
 import 'package:banking_project/domain/entities/country.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:banking_project/data/constants/app_constants.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class CountriesRepoImpl extends CountryRepo {
-  FlutterSecureStorage storage = AppConstants.storage;
-
+class CountriesRepoImpl extends CountriesRepo {
   @override
   Future<CountriesResult> getCountries() async {
-    // var sessionToken = await storage.read(key: 'access_token');
     var url = countriesULR;
 
     Map<String, String> headers = {
@@ -40,25 +36,25 @@ class CountriesRepoImpl extends CountryRepo {
     String errorMessage = "";
     switch (errorCode) {
       case 200:
-        errorMessage = "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 200";
         break;
       case 400:
-        errorMessage = "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 400";
         break;
       case 401:
-        errorMessage = "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 401";
         break;
       case 403:
-        errorMessage = "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 403";
         break;
       case 404:
-        errorMessage = "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 404";
         break;
       case 412:
-        errorMessage = "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 412";
         break;
       case 422:
-        errorMessage = "LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM";
+        errorMessage = "Text displayed when the error is 422";
         break;
     }
     return errorMessage;
