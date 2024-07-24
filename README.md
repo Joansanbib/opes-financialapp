@@ -13,7 +13,7 @@
 1.- Install all necessary components. For Windows you can follow [Tutorial Windows](https://www.youtube.com/watch?v=VFDbZk2xhO4&t=328s "Tutorial Windows") and for Mac you can use [Tutorial Mac](https://www.youtube.com/watch?v=f09c-nw15K8 "Tutorial Mac")
 
 2.- Download the project. You can do it as a .zip file or using the command 
-`git clone https://github.com/Joansanbib/erasmus-bankproject` on your system folder.
+`git clone https://github.com/Joansanbib/opes-financialapp` on your system folder.
 
 3.- Open the project on your IDE. 
 > I recommend if  you're using Visual Studio Code to use the `code .` on your project root folder terminal to open the project in a fast way.
